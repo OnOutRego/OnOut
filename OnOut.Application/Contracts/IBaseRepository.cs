@@ -16,5 +16,6 @@ namespace OnOut.Application.Contracts
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(Guid id);
     }
+
 }
     

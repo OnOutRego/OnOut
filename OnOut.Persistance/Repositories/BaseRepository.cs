@@ -1,11 +1,5 @@
 ﻿using OnOut.Domain;
 using OnOut.Application.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OnOut.Application.Contracts;
 using OnOut.Persistance.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 

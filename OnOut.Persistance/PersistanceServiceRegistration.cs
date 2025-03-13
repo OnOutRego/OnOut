@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnOut.Application.Contracts;
 using OnOut.Persistance.DatabaseContext;
+using OnOut.Persistance.Repositories;
 
 namespace OnOut.Persistance
 {
@@ -13,7 +15,8 @@ namespace OnOut.Persistance
             {
                 options.UseSqlServer(config.GetConnectionString("OnOutConnectionString"));
             });
-            
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IHasherRepository, HasherRepository>();
             
             return services;
         }
