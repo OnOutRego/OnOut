@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using OnOut.Application.Features.BaseEntity;
+using OnOut.Application.Features.Hasher;
 using OnOut.Domain;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OnOut.Application.MappingProfiles
 {
-    public class BaseEntityProfile:Profile
+    public class HasherProfile: Profile
     {
-        public BaseEntityProfile() 
+        public HasherProfile()
         {
-            CreateMap<BaseEntity, BaseEntityDto>().ReverseMap();
+            CreateMap<HasherDto, Hasher>().ReverseMap();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace OnOut.Domain
         public string HashName { get; set; }
         public string Email { get; set; }
         public string UserId { get; set; }
+        //TODO need Kennel Implementation to finish
     }
 }
