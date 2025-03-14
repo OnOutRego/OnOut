@@ -32,6 +32,11 @@ namespace OnOut.Persistance.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> ExistsById(Guid id)
+        {
+           return await _context.Set<T>().AnyAsync(x => x.Id == id);
+        }
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
