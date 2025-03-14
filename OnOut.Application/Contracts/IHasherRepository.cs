@@ -9,6 +9,6 @@ namespace OnOut.Application.Contracts
 {
     public interface IHasherRepository: IBaseRepository<Hasher>
     {
-
+        Task<Hasher> GetDetailsAsync(Guid id);
     }
 }

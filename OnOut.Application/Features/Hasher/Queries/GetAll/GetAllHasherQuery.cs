@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnOut.Application.Features.Hasher.Queries.GetAll
 {
-    public class GetAllHasherQuery: IRequest<List<HasherDto>>
+    public class GetAllHasherQuery: IRequest<List<HasherListDto>>
     {
     }
 }

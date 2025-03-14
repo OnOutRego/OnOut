@@ -11,21 +11,19 @@ using System.Threading.Tasks;
 
 namespace OnOut.Application.Features.Hasher.Queries.GetAll
 {
-    public class GetAllHasherCommandHandler : IRequestHandler<GetAllHasherQuery, List<HasherDto>>
+    public class GetAllHasherQueryHandler : IRequestHandler<GetAllHasherQuery, List<HasherListDto>>
     {
-        private readonly GetAllHasherQuery _request;
         private readonly IMapper _mapper;
-        private readonly IAppLogger<GetAllHasherCommandHandler> _logger;
+        private readonly IAppLogger<GetAllHasherQueryHandler> _logger;
         private readonly IHasherRepository _hasherRepository;
 
-        public GetAllHasherCommandHandler(GetAllHasherQuery request, IMapper mapper, IAppLogger<GetAllHasherCommandHandler> logger, IHasherRepository hasherRepository)
+        public GetAllHasherQueryHandler(IMapper mapper, IAppLogger<GetAllHasherQueryHandler> logger, IHasherRepository hasherRepository)
         {
-            this._request = request;
             this._mapper = mapper;
             this._logger = logger;
             this._hasherRepository = hasherRepository;
         }
-        public async Task<List<HasherDto>> Handle(GetAllHasherQuery request, CancellationToken cancellationToken)
+        public async Task<List<HasherListDto>> Handle(GetAllHasherQuery request, CancellationToken cancellationToken)
         {
             var hasher = await _hasherRepository.GetAllAsync();
             if(hasher.Count <= 0)
@@ -34,7 +32,7 @@ namespace OnOut.Application.Features.Hasher.Queries.GetAll
                 throw new NotFound("Hashers returned null", nameof(hasher));
             }
 
-            var dto = _mapper.Map<List<HasherDto>>(hasher);
+            var dto = _mapper.Map<List<HasherListDto>>(hasher);
             return dto;
         }
     }
