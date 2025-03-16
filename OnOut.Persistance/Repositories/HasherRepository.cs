@@ -19,6 +19,11 @@ namespace OnOut.Persistance.Repositories
             this._context = context;
         }
 
+        public async Task<bool> CheckExistsUserId(string userId)
+        {
+            return await _context.Hashers.AnyAsync(x => x.UserId == userId);
+        }
+
         public async Task<Hasher> GetDetailsAsync(Guid id)
         {
             var hasher = await _context.Hashers

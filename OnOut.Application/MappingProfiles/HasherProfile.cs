@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OnOut.Application.Features.Hasher.Queries.GetAll;
+using OnOut.Application.Features.Hasher.Queries.GetWithDetails;
 using OnOut.Domain;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace OnOut.Application.MappingProfiles
         public HasherProfile()
         {
             CreateMap<HasherListDto, Hasher>().ReverseMap();
+            CreateMap<HasherDetailsDto, Hasher>().ReverseMap();
         }
     }
 }
