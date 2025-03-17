@@ -15,6 +15,7 @@ namespace OnOut.Application.Features.Hasher.Commands.CreateCommand
         public CreateHasherCommandValidator(IHasherRepository hasherRepository)
         {
             this._hasherRepository = hasherRepository;
+
             RuleFor(q => q.UserId)
                 .NotNull().WithMessage("Must Have a UserId")
                 .NotEmpty().WithMessage("Must Have a UserId")
@@ -25,7 +26,7 @@ namespace OnOut.Application.Features.Hasher.Commands.CreateCommand
 
         private async Task<bool> HasherExists(string userId, CancellationToken token)
         {
-            var exists = await _hasherRepository.CheckExistsUserId(userId)
+                var exists = await _hasherRepository.CheckExistsUserId(userId);
                 return !exists;
         }
     }

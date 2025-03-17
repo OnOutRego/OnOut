@@ -13,6 +13,7 @@ namespace OnOut.Domain
         public string HashName { get; set; }
         public string Email { get; set; }
         public string UserId { get; set; }
+
         public string HomeCity { get; set; }
         public string HomeState { get; set; }
         public string HomeCountry { get; set; }
@@ -29,5 +30,6 @@ namespace OnOut.Domain
         //[ForeignKey(nameof(HomeKennelId))]
         //public string HomeKennelId { get; set; }
         //public Kennel HomeKennel { get; set; }
+
     }
 }
