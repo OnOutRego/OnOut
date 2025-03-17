@@ -15,7 +15,8 @@ namespace OnOut.Persistance.DatabaseContext
             
         }
 
-
+        public DbSet<Hasher> Hashers { get; set; }
+        public DbSet<DietaryChoice> DietaryChoices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
