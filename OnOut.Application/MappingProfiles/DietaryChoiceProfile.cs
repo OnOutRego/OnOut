@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using OnOut.Application.Features.BaseEntity;
+using OnOut.Application.Features.Hasher.Queries.GetWithDetails;
 using OnOut.Domain;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OnOut.Application.MappingProfiles
 {
-    public class BaseEntityProfile:Profile
+    public class DietaryChoiceProfile: Profile
     {
-        public BaseEntityProfile() 
+        public DietaryChoiceProfile()
         {
-            CreateMap<BaseEntity, BaseEntityDto>().ReverseMap();
+            CreateMap<DietaryChoice,DietaryChoiceDto>().ReverseMap();
         }
     }
 }
