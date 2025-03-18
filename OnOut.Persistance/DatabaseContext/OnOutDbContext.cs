@@ -17,6 +17,10 @@ namespace OnOut.Persistance.DatabaseContext
 
         public DbSet<Hasher> Hashers { get; set; }
         public DbSet<DietaryChoice> DietaryChoices { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventType> EventTypes { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Rego> Regoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
