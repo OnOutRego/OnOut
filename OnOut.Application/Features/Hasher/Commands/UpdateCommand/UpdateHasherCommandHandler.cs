@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using OnOut.Application.Contracts;
 using OnOut.Application.Contracts.Logging;
@@ -16,17 +17,18 @@ namespace OnOut.Application.Features.Hasher.Commands.UpdateCommand
         private readonly IAppLogger<UpdateHasherCommandHandler> _appLogger;
         private readonly IMapper _mapper;
         private readonly IHasherRepository _repository;
+        private readonly IValidator<UpdateHasherCommand> _validator;
 
-        public UpdateHasherCommandHandler(IAppLogger<UpdateHasherCommandHandler> appLogger, IMapper mapper, IHasherRepository repository)
+        public UpdateHasherCommandHandler(IAppLogger<UpdateHasherCommandHandler> appLogger, IMapper mapper, IHasherRepository repository, IValidator<UpdateHasherCommand> validator)
         {
             this._appLogger = appLogger;
             this._mapper = mapper;
             this._repository = repository;
+            this._validator = validator;
         }
         public async Task<Unit> Handle(UpdateHasherCommand request, CancellationToken cancellationToken)
         {
-            var validator = new UpdateHasherCommandValidator(_repository);
-            var validationResults = await validator.ValidateAsync(request, cancellationToken);
+            var validationResults = await _validator.ValidateAsync(request, cancellationToken);
             if(validationResults.Errors.Any())
             {
                 _appLogger.LogWarning("Errors Occured");
