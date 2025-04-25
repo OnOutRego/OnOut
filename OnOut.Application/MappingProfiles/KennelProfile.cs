@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OnOut.Application.Features.Kennel;
+using OnOut.Application.Features.Kennel.Commands.CreateKennel;
 using OnOut.Domain;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace OnOut.Application.MappingProfiles
         {
             CreateMap<Kennel, KennelDto>().ReverseMap();
             CreateMap<KennelMember, KennelMemberDto>().ReverseMap();
+            CreateMap<CreateKennelCommand, Kennel>();
             CreateMap<KennelRoles, KennelRolesDto>().ReverseMap();
             CreateMap<MisManagmentHashers,MisManagmentHashersDto>().ReverseMap();
         }

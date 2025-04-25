@@ -11,5 +11,9 @@ namespace OnOut.Domain
         [ForeignKey(nameof(KennelId))]
         public Guid KennelId { get; set; }
         public Kennel Kennel { get; set; }
+
+        [ForeignKey(nameof(RoleId))]
+        public Guid RoleId { get; set; }
+        public KennelRoles Role { get; set; }
     }
 }

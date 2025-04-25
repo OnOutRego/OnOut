@@ -6,11 +6,11 @@ namespace OnOut.Domain
 {
     public class Kennel : ProfileEntity
     {
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string State { get; set; }
-        public string MeetingTimes { get; set; }
+        public string? MeetingTimes { get; set; }
         public KennelType Type { get; set; }
         public Status Status { get; set; } = 0;
         public virtual IList<KennelRoles> Roles { get; set; }
