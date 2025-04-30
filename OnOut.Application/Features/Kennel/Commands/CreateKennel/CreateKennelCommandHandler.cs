@@ -70,6 +70,8 @@ namespace OnOut.Application.Features.Kennel.Commands.CreateKennel
             };
             //createAdminRole
             var adminId = await _mediator.Send(new CreateKennelRoleCommand() { KennelId = kennelId, RoleName = $"{kennelName}_Admin" });
+
+            //createOtherRoles
             foreach (var role in newRoles)
             {
                 await _mediator.Send(new CreateKennelRoleCommand() { KennelId = kennelId, RoleName = role });
