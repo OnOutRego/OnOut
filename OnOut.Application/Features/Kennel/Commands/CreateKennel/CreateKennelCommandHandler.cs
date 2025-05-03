@@ -51,13 +51,10 @@ namespace OnOut.Application.Features.Kennel.Commands.CreateKennel
             //Create Kennel
             var kennel = _mapper.Map<Domain.Kennel>(request);
             await _kennelRepository.CreateAsync(kennel);
-            if (kennel.Id == null)
-            {
-                throw new Exception("An error occured in the creation of a kennel");
-            }
             //Create Roles
             var adminRoleId = await CreateKennelRoles(kennel.Id, kennel.Name) ;
             //TODO Create KennelMember
+            await _mediator.Send(new CreateKennelMemberCommand() { UserId = request.FounderId, KennelId = kennel.Id, RoleId = adminRoleId });
             return kennel.Id;
 
         }
@@ -79,5 +76,12 @@ namespace OnOut.Application.Features.Kennel.Commands.CreateKennel
 
             return adminId;
         }
+    }
+
+    internal class CreateKennelMemberCommand : IRequest<Guid>
+    {
+        public Guid UserId { get; set; }
+        public Guid KennelId { get; set; }
+        public Guid RoleId { get; set; }
     }
 }
