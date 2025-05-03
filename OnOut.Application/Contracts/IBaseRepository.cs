@@ -16,6 +16,7 @@ namespace OnOut.Application.Contracts
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(Guid id);
         Task<bool> ExistsById(Guid id);
+        Task<bool> ExistsByName(string name);
     }
 
 }

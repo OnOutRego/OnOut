@@ -37,6 +37,11 @@ namespace OnOut.Persistance.Repositories
            return await _context.Set<T>().AnyAsync(x => x.Id == id);
         }
 
+        public async Task<bool> ExistsByName(string name)
+        {
+            return await _context.Set<T>().AnyAsync(x => x.Name == name);
+        }
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();

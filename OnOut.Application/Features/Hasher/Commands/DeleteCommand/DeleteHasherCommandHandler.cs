@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using OnOut.Application.Contracts;
 using OnOut.Application.Contracts.Logging;
@@ -15,17 +16,18 @@ namespace OnOut.Application.Features.Hasher.Commands.DeleteCommand
     {
         private readonly IAppLogger<DeleteHasherCommandHandler> _appLogger;
         private readonly IHasherRepository _hasherRepository;
+        private readonly IValidator<DeleteHasherCommand> _validator;
 
-        public DeleteHasherCommandHandler(IAppLogger<DeleteHasherCommandHandler> appLogger, IHasherRepository hasherRepository)
+        public DeleteHasherCommandHandler(IAppLogger<DeleteHasherCommandHandler> appLogger, IHasherRepository hasherRepository, IValidator<DeleteHasherCommand> validator)
         {
             this._appLogger = appLogger;
             this._hasherRepository = hasherRepository;
+            this._validator = validator;
         }
         public async Task<Unit> Handle(DeleteHasherCommand request, CancellationToken cancellationToken)
         {
            
-           var validator = new DeleteHasherCommandValidator(_hasherRepository);
-           var validationResults = await validator.ValidateAsync(request, cancellationToken);
+           var validationResults = await _validator.ValidateAsync(request, cancellationToken);
             if (validationResults.Errors.Any()) 
             {
                 _appLogger.LogWarning("Errors Occured");

@@ -1,6 +1,8 @@
-﻿namespace OnOut.Application.Features.Event.Queries.GetAll
+﻿using MediatR;
+
+namespace OnOut.Application.Features.Event.Queries.GetAll
 {
-    public class GetAllEventQuery
+    public class GetAllEventQuery:IRequest<List<EventListDto>>
     {
     }
 }

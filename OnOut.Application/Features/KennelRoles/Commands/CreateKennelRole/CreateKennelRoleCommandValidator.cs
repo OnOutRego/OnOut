@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnOut.Application.Features.Event.Queries.GetAll
+namespace OnOut.Application.Features.KennelRoles.Commands.CreateKennelRole
 {
-    internal class GetAllEventQueryValidator
+    internal class CreateKennelRoleCommandValidator
     {
     }
 }

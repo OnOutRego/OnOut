@@ -8,10 +8,17 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
+// Will we need cohosting support?
+//Should Contain a consent agreement? How should that work?
+
 namespace OnOut.Domain
 {
-    public class Event: BaseEntity
+    public class Event: ProfileEntity
     {
+        [ForeignKey (nameof(CreatorId))]
+        public Guid CreatorId { get; set; }
+        public Hasher Creator {  get; set; }
+
         [ForeignKey(nameof(EventTypeId))]
         public Guid EventTypeId { get; set; }
         public EventType EventType { get; set; }
@@ -33,7 +40,7 @@ namespace OnOut.Domain
 
         [ForeignKey(nameof(KennelId))]
         public Guid? KennelId { get; set; }
-        //public Kennel EventKennel
+        public Kennel? EventKennel { get; set; }
 
 
         #endregion

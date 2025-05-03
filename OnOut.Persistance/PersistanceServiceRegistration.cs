@@ -17,6 +17,11 @@ namespace OnOut.Persistance
             });
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IHasherRepository, HasherRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IEventTypeRepository, EventTypeRepository>();
+            services.AddScoped<IKennelRepository, KennelRepository>();
+            services.AddScoped<IRegoRepository, RegoRepository>();
             
             return services;
         }

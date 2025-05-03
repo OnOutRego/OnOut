@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnOut.Domain
 {
-    public class Hasher : BaseEntity
+    public class Hasher : ProfileEntity
     {
         public string HashName { get; set; }
         public string Email { get; set; }
@@ -23,13 +23,13 @@ namespace OnOut.Domain
         public DietaryChoice Diet { get; set; }
 
         //TODO need Kennel Implementation to finish
-        //[ForeignKey(nameof(MotherKennelId))]
-        //public string MotherKennelId { get; set; }
-        //public Kennel MotherKennel { get; set; }
+        [ForeignKey(nameof(MotherKennelId))]
+        public string MotherKennelId { get; set; }
+        public Kennel MotherKennel { get; set; }
 
-        //[ForeignKey(nameof(HomeKennelId))]
-        //public string HomeKennelId { get; set; }
-        //public Kennel HomeKennel { get; set; }
+        [ForeignKey(nameof(HomeKennelId))]
+        public string HomeKennelId { get; set; }
+        public Kennel HomeKennel { get; set; }
 
     }
 }

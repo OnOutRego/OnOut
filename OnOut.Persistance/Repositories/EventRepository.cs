@@ -23,8 +23,8 @@ namespace OnOut.Persistance.Repositories
         {
             return await _context.Events
                             .Include(q => q.Regos)
-                            //.ThenInclude(x => x.Hasher)
-                            //.Include(q => q.Kennel)
+                            .ThenInclude(x => x.Hasher)
+                            .Include(q => q.EventKennel)
                             .Include(q => q.Location)
                             .Include(q=> q.EventType)
                             .FirstOrDefaultAsync(q => q.Id == EventId);

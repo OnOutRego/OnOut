@@ -21,6 +21,10 @@ namespace OnOut.Persistance.DatabaseContext
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Rego> Regoes { get; set; }
+        public DbSet<Kennel> Kennels { get; set; }
+        public DbSet<KennelRoles> KennelRoles { get; set; }
+        public DbSet<KennelMember> KennelMembers { get; set; }
+        public DbSet<MisManagmentHashers> Mismanagement {  get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
