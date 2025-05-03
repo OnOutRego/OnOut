@@ -22,9 +22,17 @@ namespace OnOut.Application.Features.Kennel.Queries.GetAll
             this._mapper = mapper;
             this._repository = repository;
         }
-        public Task<List<KennelListDto>> Handle(GetAllKennelsQuery request, CancellationToken cancellationToken)
+        public async Task<List<KennelListDto>> Handle(GetAllKennelsQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var kennels = await _repository.GetAllAsync();
+            if (kennels == null || !kennels.Any())
+            {
+                _appLogger.LogWarning("No kennels found.");
+            }
+
+            var kennelList = _mapper.Map<List<KennelListDto>>(kennels);
+            _appLogger.LogInformation($"Retrieved {kennelList.Count} kennels.");
+            return kennelList;
         }
     }
 }
