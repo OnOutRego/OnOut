@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnOut.Application.Features.KennelRoles.Commands.DeleteKennelRole
 {
-    public class DeleteKennelRoleCommand: IRequest<Guid>
+    public class DeleteKennelRoleCommand: IRequest<Unit>
     {
         public Guid RoleId { get; set; }
     }

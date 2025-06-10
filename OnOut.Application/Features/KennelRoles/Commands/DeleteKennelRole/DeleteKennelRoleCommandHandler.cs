@@ -1,10 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using OnOut.Application.Interfaces;
-using OnOut.Application.Common.Interfaces;
-using OnOut.Application.Common.Logging;
-using OnOut.Domain.Entities;
+using OnOut.Application.Contracts;
+using OnOut.Application.Contracts.Logging;
 
 namespace OnOut.Application.Features.KennelRoles.Commands.DeleteKennelRole
 {
@@ -22,9 +20,10 @@ namespace OnOut.Application.Features.KennelRoles.Commands.DeleteKennelRole
         }
 
         public async Task<Unit> Handle(DeleteKennelRoleCommand request, CancellationToken cancellationToken)
-        {
-            await _kennelRolesRepository.DeleteAsync(request.Id, cancellationToken);
-            _logger.LogInformation($"KennelRole with Id {request.Id} deleted.");
+        {   
+            var role = await _kennelRolesRepository.GetByIdAsync(request.RoleId);
+            await _kennelRolesRepository.DeleteAsync(role);
+            _logger.LogInformation($"KennelRole with Id {request.RoleId} deleted.");
             return Unit.Value;
         }
     }
