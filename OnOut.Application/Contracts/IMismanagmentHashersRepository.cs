@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace OnOut.Application.Contracts
 {
-    public interface IMismanagmentHashersRepository:IBaseRepository<MisManagmentHashers>
+    public interface IMismanagmentHashersRepository : IBaseRepository<MisManagmentHashers>
     {
+        public Task<List<MisManagmentHashers>> GetByKennelId(Guid kennelId);
+        public Task<List<MisManagmentHashers>> GetByHasher(Guid hasherId);
     }
 }
