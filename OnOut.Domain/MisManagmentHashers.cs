@@ -17,6 +17,5 @@ namespace OnOut.Domain
         public Guid KennelId { get; set;}
         public Kennel Kennel { get; set;}
 
-        public string Position { get; set; }
     }
 }

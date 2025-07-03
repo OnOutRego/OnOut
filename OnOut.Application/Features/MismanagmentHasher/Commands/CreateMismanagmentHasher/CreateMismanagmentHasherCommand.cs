@@ -9,8 +9,5 @@ namespace OnOut.Application.Features.MismanagmentHasher.Commands.CreateMismanagm
 {
     public class CreateMismanagmentHasherCommand : IRequest<Guid>
     {
-        public Guid HasherId { get; set; }
-        public Guid KennelId { get; set; }
-        public string Position { get; set; }
     }
 }
