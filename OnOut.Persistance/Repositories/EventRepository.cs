@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OnOut.Application.Contracts;
 using OnOut.Domain;
 using OnOut.Persistance.DatabaseContext;
@@ -19,15 +19,15 @@ namespace OnOut.Persistance.Repositories
             this._context = context;
         }
 
-        public async Task<Event> GetEventWithDetails(Guid EventId)
+        public async Task<Event> GetEventWithDetails(Guid eventId)
         {
             return await _context.Events
                             .Include(q => q.Regos)
                             .ThenInclude(x => x.Hasher)
                             .Include(q => q.EventKennel)
                             .Include(q => q.Location)
-                            .Include(q=> q.EventType)
-                            .FirstOrDefaultAsync(q => q.Id == EventId);
+                            .Include(q => q.EventType)
+                            .FirstOrDefaultAsync(q => q.Id == eventId);
         }
     }
 }

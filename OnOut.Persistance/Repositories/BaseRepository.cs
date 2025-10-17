@@ -1,4 +1,4 @@
-﻿using OnOut.Domain;
+using OnOut.Domain;
 using OnOut.Application.Contracts;
 using OnOut.Persistance.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +34,7 @@ namespace OnOut.Persistance.Repositories
 
         public async Task<bool> ExistsById(Guid id)
         {
-           return await _context.Set<T>().AnyAsync(x => x.Id == id);
+            return await _context.Set<T>().AnyAsync(x => x.Id == id);
         }
 
         public async Task<bool> ExistsByName(string name)
@@ -42,7 +42,7 @@ namespace OnOut.Persistance.Repositories
             return await _context.Set<T>().AnyAsync(x => x.Name == name);
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public virtual async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
