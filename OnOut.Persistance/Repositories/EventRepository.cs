@@ -10,11 +10,6 @@ using System.Threading.Tasks;
 
 namespace OnOut.Persistance.Repositories
 {
-    public interface IEventRepository
-    {
-        Task<Event> GetEventWithDetails(Guid eventId);
-    }
-
     public class EventRepository : BaseRepository<Event>, IEventRepository
     {
         private readonly OnOutDbContext _context;

@@ -6,6 +6,8 @@ using System.Data.SqlTypes;
 namespace OnOut.Application.Features.Event;
 public class EventDto
 {
+    public Guid Id { get; set; }
+    public string Name { get; set; }
     public HasherDetailsDto Creator { get; set; }
     public EventTypeDto EventType { get; set; }
     public bool IsSubEvent { get; set; }
