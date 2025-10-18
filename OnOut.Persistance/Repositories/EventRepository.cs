@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 
 namespace OnOut.Persistance.Repositories
 {
+    public interface IEventRepository
+    {
+        Task<Event> GetEventWithDetails(Guid eventId);
+    }
+
     public class EventRepository : BaseRepository<Event>, IEventRepository
     {
         private readonly OnOutDbContext _context;
@@ -29,5 +34,15 @@ namespace OnOut.Persistance.Repositories
                             .Include(q => q.EventType)
                             .FirstOrDefaultAsync(q => q.Id == eventId);
         }
+        public async Task<List<Event>> GetEventsForKennel(Guid kennelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Event>> GetEventsForHasher(Guid hasherId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
