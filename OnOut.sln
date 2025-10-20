@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnOut.Persistance", "OnOut.Persistance\OnOut.Persistance.csproj", "{0448CDE0-8708-40D0-B802-2950D1501930}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnOut.Infrastructure", "OnOut.Infrastructure\OnOut.Infrastructure.csproj", "{B2EE2E90-FE7F-4C2A-96BB-588814482BD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnOut.Infrastructure", "OnOut.Infrastructure\OnOut.Infrastructure.csproj", "{B2EE2E90-FE7F-4C2A-96BB-588814482BD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnOut.Identity", "OnOut.Identity\OnOut.Identity.csproj", "{15CFA05D-BE9A-4F92-A07E-1D4125FF7FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B2EE2E90-FE7F-4C2A-96BB-588814482BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2EE2E90-FE7F-4C2A-96BB-588814482BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2EE2E90-FE7F-4C2A-96BB-588814482BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CFA05D-BE9A-4F92-A07E-1D4125FF7FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CFA05D-BE9A-4F92-A07E-1D4125FF7FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CFA05D-BE9A-4F92-A07E-1D4125FF7FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CFA05D-BE9A-4F92-A07E-1D4125FF7FB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{CED7AE57-2A32-43BB-A549-A76214B467BB} = {E1FED3F1-171E-4633-92B3-01000BA094D6}
 		{0448CDE0-8708-40D0-B802-2950D1501930} = {CED7AE57-2A32-43BB-A549-A76214B467BB}
 		{B2EE2E90-FE7F-4C2A-96BB-588814482BD8} = {CED7AE57-2A32-43BB-A549-A76214B467BB}
+		{15CFA05D-BE9A-4F92-A07E-1D4125FF7FB1} = {CED7AE57-2A32-43BB-A549-A76214B467BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {502D72A3-BEF4-4965-BD7A-3D3E094383A2}

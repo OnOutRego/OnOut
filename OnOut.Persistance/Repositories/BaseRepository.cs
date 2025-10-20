@@ -1,10 +1,4 @@
-﻿using OnOut.Domain;
-using OnOut.Application.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OnOut.Domain;
 using OnOut.Application.Contracts;
 using OnOut.Persistance.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +32,17 @@ namespace OnOut.Persistance.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<bool> ExistsById(Guid id)
+        {
+            return await _context.Set<T>().AnyAsync(x => x.Id == id);
+        }
+
+        public async Task<bool> ExistsByName(string name)
+        {
+            return await _context.Set<T>().AnyAsync(x => x.Name == name);
+        }
+
+        public virtual async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }

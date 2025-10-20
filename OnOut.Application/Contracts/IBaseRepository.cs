@@ -15,6 +15,9 @@ namespace OnOut.Application.Contracts
         Task DeleteListAsync(List<T> entities);
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(Guid id);
+        Task<bool> ExistsById(Guid id);
+        Task<bool> ExistsByName(string name);
     }
+
 }
     
