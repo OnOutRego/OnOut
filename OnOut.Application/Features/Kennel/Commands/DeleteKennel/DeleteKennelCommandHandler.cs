@@ -45,6 +45,12 @@ namespace OnOut.Application.Features.Kennel.Commands.DeleteKennel
                 throw new KeyNotFoundException($"Kennel with Id {request.Id} not found.");
             }
 
+            //Delete the KennelMembers associated with the kennel
+
+            //Delete the misManagementList associated with the kennel
+
+            //Delete the kennelRoles associated with the kennel
+
             // Delete the kennel
             await _kennelRepository.DeleteAsync(kennel);
             _logger.LogInformation("Kennel with Id {Id} was successfully deleted.", request.Id);

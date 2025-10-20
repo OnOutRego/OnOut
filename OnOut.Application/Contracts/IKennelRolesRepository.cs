@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnOut.Application.Contracts
 {
-    public interface IKennelRoles: IBaseRepository<KennelRoles>
+    public interface IKennelRolesRepository: IBaseRepository<KennelRoles>
     {
     }
 }

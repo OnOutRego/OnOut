@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace OnOut.Domain
 {
-    public class Event: ProfileEntity
+    public class Event : ProfileEntity
     {
-        [ForeignKey (nameof(CreatorId))]
+        [ForeignKey(nameof(CreatorId))]
         public Guid CreatorId { get; set; }
-        public Hasher Creator {  get; set; }
+        public Hasher Creator { get; set; }
 
         [ForeignKey(nameof(EventTypeId))]
         public Guid EventTypeId { get; set; }
@@ -26,12 +26,12 @@ namespace OnOut.Domain
 
         public bool IsSubEvent { get; set; }
         public string Description { get; set; }
-        
+
         [ForeignKey(nameof(LocationId))]
         public Guid LocationId { get; set; }
         public Address Location { get; set; }
 
-        DateTime TrailTime { get; set; }
+        public DateTime TrailTime { get; set; }
 
         public double ShiggyLevel { get; set; }
 

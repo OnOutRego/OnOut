@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using FluentValidation;
 using MediatR;
 using OnOut.Application.Contracts;
@@ -29,13 +29,14 @@ namespace OnOut.Application.Features.Hasher.Commands.UpdateCommand
         public async Task<Unit> Handle(UpdateHasherCommand request, CancellationToken cancellationToken)
         {
             var validationResults = await _validator.ValidateAsync(request, cancellationToken);
-            if(validationResults.Errors.Any())
+            if (validationResults.Errors.Any())
             {
                 _appLogger.LogWarning("Errors Occured");
                 foreach (var validationResult in validationResults.Errors)
                 {
                     _appLogger.LogWarning(validationResult.ErrorMessage);
-                    if (validationResult.ErrorMessage.Contains("Permission")){
+                    if (validationResult.ErrorMessage.Contains("Permission"))
+                    {
                         throw new BadRequest(validationResult.ErrorMessage);
                     }
                 }

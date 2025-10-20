@@ -9,5 +9,8 @@ namespace OnOut.Application.Contracts
 {
     public interface IKennelMemberRepository: IBaseRepository<KennelMember>
     {
+        public Task<List<KennelMember>> GetRolesByUser(Guid userId);
+        
+        public Task<List<KennelMember>> GetKennelMembersByKennelId(Guid kennelId);
     }
 }
