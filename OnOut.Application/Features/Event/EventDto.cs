@@ -1,5 +1,6 @@
 using OnOut.Application.Features.Hasher.Queries.GetWithDetails;
 using OnOut.Application.Features.Event.Queries.GetAll;
+using OnOut.Application.Features.Rego;
 using OnOut.Domain;
 using OnOut.Application.Features.Kennel;
 using System.Data.SqlTypes;
@@ -20,7 +21,7 @@ public class EventDto
     public int MaxRegos { get; set; }
     public List<string> Gimmes { get; set; }
     public bool HasGimmes { get; set; }
-    public virtual IList<Rego> Regos { get; set; }
+    public virtual IList<RegoDto> Regos { get; set; }
     public bool HasEarlyRego { get; set; }
     public DateTime EarlyRegoDeadline { get; set; }
     public SqlMoney EarlyRegoPrice { get; set; }

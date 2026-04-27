@@ -28,4 +28,5 @@ public class GetOneWithDetailsQueryHandler : IRequestHandler<GetOneWithDetailsQu
         var dto = _mapper.Map<EventDto>(specificEvent);
         return dto;
     }
+
 }
