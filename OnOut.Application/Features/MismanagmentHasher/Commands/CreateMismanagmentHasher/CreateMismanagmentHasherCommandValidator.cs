@@ -8,7 +8,7 @@ using OnOut.Application.Contracts;
 
 namespace OnOut.Application.Features.MismanagmentHasher.Commands.CreateMismanagmentHasher
 {
-    internal class CreateMismanagmentHasherCommandValidator : AbstractValidator<CreateMismanagmentHasherCommand>
+    public class CreateMismanagmentHasherCommandValidator : AbstractValidator<CreateMismanagmentHasherCommand>
     {
         private readonly IHasherRepository _hasherRepository;
         private readonly IKennelRepository _kennelRepository;

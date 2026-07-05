@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace OnOut.Application.Features.Rego.Queries.GetRego;
 
 public class GetRegoQuery : IRequest<RegoDto>

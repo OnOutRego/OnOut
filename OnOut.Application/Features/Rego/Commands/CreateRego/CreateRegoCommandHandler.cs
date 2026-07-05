@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace OnOut.Application.Features.Rego.Commands.CreateRego;
 
 public class CreateRegoCommandHandler : IRequestHandler<CreateRegoCommand, Unit>

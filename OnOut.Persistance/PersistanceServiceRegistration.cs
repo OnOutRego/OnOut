@@ -22,7 +22,10 @@ namespace OnOut.Persistance
             services.AddScoped<IEventTypeRepository, EventTypeRepository>();
             services.AddScoped<IKennelRepository, KennelRepository>();
             services.AddScoped<IRegoRepository, RegoRepository>();
-            
+            services.AddScoped<IKennelMemberRepository,KennelMemberRepository>();
+            services.AddScoped<IKennelRolesRepository,KennelRolesRepository>();
+            services.AddScoped<IMismanagmentHashersRepository,MismanagementHashersRepository>();
+                 
             return services;
         }
     }

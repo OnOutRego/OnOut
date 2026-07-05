@@ -8,10 +8,11 @@ namespace OnOut.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            var assembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => 
-            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            cfg.RegisterServicesFromAssembly(assembly));
+            services.AddValidatorsFromAssembly(assembly);
+            services.AddAutoMapper(assembly);
             return services;
 
         }

@@ -1,3 +1,5 @@
+using FluentValidation;
+
 namespace OnOut.Application.Features.Rego.Commands.UpdateRego;
 
 public class UpdateRegoCommandValidator : AbstractValidator<UpdateRegoCommand>

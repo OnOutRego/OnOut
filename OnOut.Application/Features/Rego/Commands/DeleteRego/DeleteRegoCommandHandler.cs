@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace OnOut.Application.Features.Rego.Commands.DeleteRego;
 
 public class DeleteRegoCommandHandler : IRequestHandler<DeleteRegoCommand, Unit>
