@@ -10,13 +10,16 @@ namespace OnOut.Domain
 {
     public class Hasher : ProfileEntity
     {
-        public string HashName { get; set; }
-        public string Email { get; set; }
-        public string UserId { get; set; }
+        public string HashName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
 
-        public string HomeCity { get; set; }
-        public string HomeState { get; set; }
-        public string HomeCountry { get; set; }
+        // New: link to Auth0 identity
+        public string Auth0Subject { get; set; } = string.Empty;
+
+        public string HomeCity { get; set; } = string.Empty;
+        public string HomeState { get; set; } = string.Empty;
+        public string HomeCountry { get; set; } = string.Empty;
 
         [ForeignKey(nameof(DietaryChoiceId))]
         public string DietaryChoiceId { get; set; }
@@ -31,5 +34,6 @@ namespace OnOut.Domain
         public string HomeKennelId { get; set; }
         public Kennel HomeKennel { get; set; }
 
+        public bool ProfileCompleted { get; set; }
     }
 }

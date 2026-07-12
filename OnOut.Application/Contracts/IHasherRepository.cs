@@ -11,5 +11,6 @@ namespace OnOut.Application.Contracts
     {
         Task<Hasher> GetDetailsAsync(Guid id);
         Task<bool> CheckExistsUserId(string userId);
+        Task<Hasher?> GetByAuth0SubjectAsync(string auth0Subject);
     }
 }

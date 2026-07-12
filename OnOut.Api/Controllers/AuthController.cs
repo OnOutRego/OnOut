@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using OnOut.Application.Features.Hasher.Commands.UpdateCommand;
 
 namespace OnOut.Api.Controllers;
 
@@ -11,6 +13,13 @@ namespace OnOut.Api.Controllers;
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
+    private readonly IMediator _mediator;
+
+    public AuthController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
     [HttpGet("login")]
     public IActionResult Login([FromQuery] string? returnUrl = "/")
     {
@@ -24,18 +33,25 @@ public class AuthController : ControllerBase
 
     [Authorize]
     [HttpGet("me")]
-    public IActionResult Me()
+    public async Task<IActionResult> Me()
     {
-        return Ok(new
+        var subject = User.FindFirst("sub")?.Value;
+        var email = User.FindFirst("email")?.Value;
+        var name = User.FindFirst("name")?.Value;
+
+        if (string.IsNullOrWhiteSpace(subject))
         {
-            isAuthenticated = User.Identity?.IsAuthenticated ?? false,
-            name = User.Identity?.Name,
-            claims = User.Claims.Select(c => new
-            {
-                c.Type,
-                c.Value
-            })
+            return Unauthorized();
+        }
+
+        var result = await _mediator.Send(new EnsureHasherFromAuth0Command
+        {
+            Subject = subject,
+            Email = email,
+            Name = name
         });
+
+        return Ok(result);
     }
 
     [Authorize]
@@ -49,5 +65,18 @@ public class AuthController : ControllerBase
             },
             CookieAuthenticationDefaults.AuthenticationScheme,
             OpenIdConnectDefaults.AuthenticationScheme);
+    }
+
+    [Authorize]
+    [HttpPut("profile")]
+    public async Task<IActionResult> UpdateProfile([FromBody] UpdateHasherCommand command)
+    {
+        if (command == null)
+        {
+            return BadRequest();
+        }
+
+        var updated = await _mediator.Send(command);
+        return Ok(updated);
     }
 }

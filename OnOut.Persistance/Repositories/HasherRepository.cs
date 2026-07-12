@@ -31,5 +31,11 @@ namespace OnOut.Persistance.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
             return hasher;
         }
+
+        public async Task<Hasher?> GetByAuth0SubjectAsync(string auth0Subject)
+        {
+            return await _context.Hashers
+                .FirstOrDefaultAsync(x => x.Auth0Subject == auth0Subject);
+        }
     }
 }
