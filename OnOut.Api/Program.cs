@@ -1,8 +1,9 @@
-using OnOut.Infrastructure;
-using OnOut.Application;
-using OnOut.Persistance;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using OnOut.Application;
+using OnOut.Infrastructure;
+using OnOut.Persistance;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +19,13 @@ builder.Services.AddCors(options =>
               .AllowCredentials());
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.Authority = $"https://{auth0Domain}/";
         options.Audience = auth0Audience;
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             NameClaimType = "name",
@@ -37,8 +40,10 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Built-in ASP.NET Core OpenAPI generation
+builder.Services.AddOpenApi();
+
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistanceServices(builder.Configuration);
@@ -47,15 +52,21 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // OpenAPI document:
+    // https://localhost:<port>/openapi/v1.json
+    app.MapOpenApi();
+
+    // Scalar interface:
+    // https://localhost:<port>/scalar/v1
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
 app.UseCors("AllowReact");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.Run();
 
+app.Run();

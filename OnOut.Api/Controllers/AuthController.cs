@@ -11,6 +11,7 @@ namespace OnOut.Api.Controllers;
 
 [ApiController]
 [Route("api/auth")]
+[Authorize]
 public class AuthController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -31,18 +32,17 @@ public class AuthController : ControllerBase
             OpenIdConnectDefaults.AuthenticationScheme);
     }
 
-    [Authorize]
     [HttpGet("me")]
     public async Task<IActionResult> Me()
     {
         var subject = User.FindFirst("sub")?.Value;
-        var email = User.FindFirst("email")?.Value;
-        var name = User.FindFirst("name")?.Value;
-
         if (string.IsNullOrWhiteSpace(subject))
         {
             return Unauthorized();
         }
+
+        var email = User.FindFirst("email")?.Value;
+        var name = User.FindFirst("name")?.Value;
 
         var result = await _mediator.Send(new EnsureHasherFromAuth0Command
         {
@@ -54,7 +54,6 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
-    [Authorize]
     [HttpPost("logout")]
     public IActionResult Logout()
     {
@@ -67,7 +66,6 @@ public class AuthController : ControllerBase
             OpenIdConnectDefaults.AuthenticationScheme);
     }
 
-    [Authorize]
     [HttpPut("profile")]
     public async Task<IActionResult> UpdateProfile([FromBody] UpdateHasherCommand command)
     {
