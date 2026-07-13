@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
+ 
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
@@ -55,8 +55,10 @@ namespace OnOut.Domain
 
         public bool HasEarlyRego { get; set; }
         public DateTime EarlyRegoDeadline { get; set; }
-        public SqlMoney EarlyRegoPrice { get; set; }
-        public SqlMoney RegoPrice { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal EarlyRegoPrice { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal RegoPrice { get; set; }
         public DateTime RegoDeadline { get; set; }
 
         #endregion

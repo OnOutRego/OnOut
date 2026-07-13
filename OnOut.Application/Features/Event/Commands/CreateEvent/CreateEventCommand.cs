@@ -3,7 +3,7 @@ using OnOut.Application.Features.Hasher.Queries.GetWithDetails;
 using OnOut.Application.Features.Event.Queries.GetAll;
 using OnOut.Domain;
 using OnOut.Application.Features.Kennel;
-using System.Data.SqlTypes;
+ 
 namespace OnOut.Application.Features.Event.Commands.CreateEvent;
 public class CreateEventCommand : IRequest<Guid>
 {
@@ -24,7 +24,7 @@ public class CreateEventCommand : IRequest<Guid>
     public virtual IList<OnOut.Domain.Rego> Regos { get; set; }
     public bool HasEarlyRego { get; set; }
     public DateTime EarlyRegoDeadline { get; set; }
-    public SqlMoney EarlyRegoPrice { get; set; }
-    public SqlMoney RegoPrice { get; set; }
+    public decimal EarlyRegoPrice { get; set; }
+    public decimal RegoPrice { get; set; }
     public DateTime RegoDeadline { get; set; }
 }

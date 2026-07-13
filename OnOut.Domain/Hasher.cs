@@ -21,18 +21,18 @@ namespace OnOut.Domain
         public string HomeState { get; set; } = string.Empty;
         public string HomeCountry { get; set; } = string.Empty;
 
+        public Guid? DietaryChoiceId { get; set; }
         [ForeignKey(nameof(DietaryChoiceId))]
-        public string DietaryChoiceId { get; set; }
-        public DietaryChoice Diet { get; set; }
+        public DietaryChoice? Diet { get; set; }
 
         //TODO need Kennel Implementation to finish
+        public Guid? MotherKennelId { get; set; }
         [ForeignKey(nameof(MotherKennelId))]
-        public string MotherKennelId { get; set; }
-        public Kennel MotherKennel { get; set; }
+        public Kennel? MotherKennel { get; set; }
 
+        public Guid? HomeKennelId { get; set; }
         [ForeignKey(nameof(HomeKennelId))]
-        public string HomeKennelId { get; set; }
-        public Kennel HomeKennel { get; set; }
+        public Kennel? HomeKennel { get; set; }
 
         public bool ProfileCompleted { get; set; }
     }

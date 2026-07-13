@@ -3,7 +3,7 @@ using OnOut.Application.Features.Event.Queries.GetAll;
 using OnOut.Application.Features.Rego;
 using OnOut.Domain;
 using OnOut.Application.Features.Kennel;
-using System.Data.SqlTypes;
+ 
 namespace OnOut.Application.Features.Event;
 public class EventDto
 {
@@ -24,8 +24,8 @@ public class EventDto
     public virtual IList<RegoDto> Regos { get; set; }
     public bool HasEarlyRego { get; set; }
     public DateTime EarlyRegoDeadline { get; set; }
-    public SqlMoney EarlyRegoPrice { get; set; }
-    public SqlMoney RegoPrice { get; set; }
+    public decimal EarlyRegoPrice { get; set; }
+    public decimal RegoPrice { get; set; }
     public DateTime RegoDeadline { get; set; }
 
 }

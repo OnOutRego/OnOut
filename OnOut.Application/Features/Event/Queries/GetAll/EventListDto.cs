@@ -1,6 +1,6 @@
 ﻿using OnOut.Application.Features.Kennel;
 using OnOut.Domain;
-using System.Data.SqlTypes;
+ 
 
 namespace OnOut.Application.Features.Event.Queries.GetAll
 {
@@ -21,7 +21,7 @@ namespace OnOut.Application.Features.Event.Queries.GetAll
         public bool HasKennel { get; set; }
         public KennelDto? EventKennel { get; set; }
         public int Regos { get; set; }
-        public SqlMoney EarlyRegoPrice { get; set; }
-        public SqlMoney RegoPrice { get; set; }
+        public decimal EarlyRegoPrice { get; set; }
+        public decimal RegoPrice { get; set; }
     }
 }
