@@ -24,8 +24,21 @@ public class EnsureHasherFromAuth0CommandHandler : IRequestHandler<EnsureHasherF
             {
                 HasherId = existing.Id,
                 IsNewUser = false,
-                NeedsProfileCompletion = existing.ProfileCompleted == false
+                NeedsProfileCompletion = existing.ProfileCompleted == false,
+                HomeCity = existing.HomeCity,
+                HomeState = existing.HomeState,
+                HomeCountry = existing.HomeCountry
             };
+        }
+
+        var profileName = request.Name;
+        if (string.IsNullOrWhiteSpace(profileName))
+        {
+            profileName = request.Email;
+        }
+        if (string.IsNullOrWhiteSpace(profileName))
+        {
+            profileName = "New Hasher";
         }
 
         var newHasher = new Hasher
@@ -34,7 +47,8 @@ public class EnsureHasherFromAuth0CommandHandler : IRequestHandler<EnsureHasherF
             Auth0Subject = request.Subject,
             UserId = request.Subject,
             Email = request.Email ?? string.Empty,
-            HashName = request.Name ?? request.Email ?? "New Hasher",
+            Name = profileName,
+            HashName = profileName,
             ProfileCompleted = false
         };
 

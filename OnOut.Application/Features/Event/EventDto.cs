@@ -9,6 +9,8 @@ public class EventDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+    public byte[] PrimaryImage { get; set; } = Array.Empty<byte>();
+    public byte[] BannerImage { get; set; } = Array.Empty<byte>();
     public HasherDetailsDto Creator { get; set; }
     public EventTypeDto EventType { get; set; }
     public bool IsSubEvent { get; set; }

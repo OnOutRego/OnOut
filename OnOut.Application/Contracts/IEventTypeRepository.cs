@@ -9,5 +9,6 @@ namespace OnOut.Application.Contracts
 {
     public interface IEventTypeRepository: IBaseRepository<EventType>
     {
+        Task<EventType?> GetByNameAsync(string name);
     }
 }

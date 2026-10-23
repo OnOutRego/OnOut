@@ -14,6 +14,8 @@ namespace OnOut.Application.Features.Hasher.Queries.GetWithDetails
         public string HomeCity { get; set; }
         public string HomeState { get; set; }
         public string HomeCountry { get; set; }
-        public DietaryChoiceDto DietaryChoice { get; set; }
+        public Guid? DietaryChoiceId { get; set; }
+        public bool ProfileCompleted { get; set; }
+        public DietaryChoiceDto? DietaryChoice { get; set; }
     }
 }

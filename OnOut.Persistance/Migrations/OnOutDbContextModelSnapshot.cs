@@ -409,7 +409,7 @@ namespace OnOut.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoleId")
+                    b.Property<Guid?>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -525,7 +525,7 @@ namespace OnOut.Persistance.Migrations
                     b.HasOne("OnOut.Domain.Hasher", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OnOut.Domain.EventType", "EventType")
@@ -579,20 +579,16 @@ namespace OnOut.Persistance.Migrations
                     b.HasOne("OnOut.Domain.Hasher", "Hasher")
                         .WithMany()
                         .HasForeignKey("HasherId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OnOut.Domain.Kennel", "Kennel")
                         .WithMany("Members")
                         .HasForeignKey("KennelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("OnOut.Domain.KennelRoles", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Hasher");
 
@@ -617,7 +613,7 @@ namespace OnOut.Persistance.Migrations
                     b.HasOne("OnOut.Domain.Hasher", "Hasher")
                         .WithMany()
                         .HasForeignKey("HasherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OnOut.Domain.Kennel", "Kennel")
@@ -642,7 +638,7 @@ namespace OnOut.Persistance.Migrations
                     b.HasOne("OnOut.Domain.Hasher", "Hasher")
                         .WithMany()
                         .HasForeignKey("HasherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Event");

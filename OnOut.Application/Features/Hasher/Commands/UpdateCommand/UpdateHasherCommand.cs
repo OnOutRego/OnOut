@@ -11,6 +11,6 @@ namespace OnOut.Application.Features.Hasher.Commands.UpdateCommand
     public class UpdateHasherCommand: IRequest<Unit>
     {
         public HasherDetailsDto Hasher {  get; set; }
-        public string SenderId { get; set; }
+        public string? SenderId { get; set; }
     }
 }

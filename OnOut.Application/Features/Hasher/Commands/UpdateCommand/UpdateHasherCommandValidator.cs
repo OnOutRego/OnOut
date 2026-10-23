@@ -19,16 +19,21 @@ namespace OnOut.Application.Features.Hasher.Commands.UpdateCommand
             RuleFor(q => q)
                 .MustAsync(HasherExists)
                 .WithMessage("Hasher does not exist!");
-            RuleFor(q => q.Hasher.Id)
+            RuleFor(q => q)
                 .MustAsync(PermissionsExist)
                 .WithMessage("You do not have permission to Edit this Hasher");
             
         }
 
-        private async Task<bool> PermissionsExist(Guid guid, CancellationToken token)
+        private async Task<bool> PermissionsExist(UpdateHasherCommand command, CancellationToken token)
         {
-            //TODO: Authentication will be required to check claims IF the editor is NOT the hasher
-            return true;
+            if (string.IsNullOrWhiteSpace(command.SenderId))
+            {
+                return false;
+            }
+
+            var hasher = await _hasherRepository.GetByAuth0SubjectAsync(command.SenderId);
+            return hasher?.Id == command.Hasher.Id;
         }
 
         private async Task<bool> HasherExists(UpdateHasherCommand command, CancellationToken token)

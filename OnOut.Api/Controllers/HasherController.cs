@@ -60,6 +60,7 @@ public class HasherController : ControllerBase
             return BadRequest("Route id must match hasher id in request body.");
         }
 
+        command.SenderId = User.FindFirst("sub")?.Value ?? string.Empty;
         await _mediator.Send(command, cancellationToken);
         return NoContent();
     }

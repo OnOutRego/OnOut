@@ -7,29 +7,50 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var auth0Domain = builder.Configuration["Auth0:Domain"];
+var auth0Authority = builder.Configuration["Auth0:Authority"];
 var auth0Audience = builder.Configuration["Auth0:Audience"];
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact", policy =>
-        policy.WithOrigins("http://localhost:3000", "http://localhost:5173")
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials());
+              .AllowAnyMethod());
 });
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = $"https://{auth0Domain}/";
-        options.Audience = auth0Audience;
+        options.MapInboundClaims = false;
+
+        if (!string.IsNullOrWhiteSpace(auth0Authority))
+        {
+            options.Authority = auth0Authority.TrimEnd('/');
+        }
+        else
+        {
+            var auth0Domain = builder.Configuration["Auth0:Domain"];
+            if (!string.IsNullOrWhiteSpace(auth0Domain))
+            {
+                options.Authority = $"https://{auth0Domain.TrimEnd('/')}/";
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(auth0Audience))
+        {
+            options.Audience = auth0Audience;
+        }
+        else
+        {
+            options.TokenValidationParameters.ValidateAudience = false;
+        }
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
             NameClaimType = "name",
-            RoleClaimType = "roles"
+            RoleClaimType = "roles",
+            ValidateAudience = !string.IsNullOrWhiteSpace(auth0Audience)
         };
     });
 
@@ -60,8 +81,15 @@ if (app.Environment.IsDevelopment())
     // https://localhost:<port>/scalar/v1
     app.MapScalarApiReference();
 }
+app.UseRouting();
+// Only enable HTTPS redirection in non-development environments to avoid
+// "Failed to determine https port for redirect" when running the app
+// with HTTP-only endpoints during local development.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
-app.UseHttpsRedirection();
 app.UseCors("AllowReact");
 
 app.UseAuthentication();

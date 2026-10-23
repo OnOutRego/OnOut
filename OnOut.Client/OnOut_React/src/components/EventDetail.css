@@ -1,0 +1,225 @@
+.event-detail-page {
+  min-height: 100svh;
+  padding-bottom: 74px;
+  background: #fafafa;
+  color: #1d1b20;
+  font-family: 'Barlow Condensed', Barlow, sans-serif;
+}
+
+.event-detail-header {
+  height: 52px;
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  padding: 0 16px;
+  color: #fff;
+  background: linear-gradient(110deg, #a24bff 20%, #c86cff 100%);
+  font: 600 17px/1 'Sofia Sans Semi Condensed', sans-serif;
+}
+
+.event-detail-back {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: transparent;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.event-detail-header-spacer {
+  width: 36px;
+}
+
+.event-detail-hero {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: #4a3f51;
+}
+
+.event-detail-hero > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-detail-date {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 46px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #6d6672;
+  background: rgba(255, 255, 255, 0.88);
+  font: 400 16px/16px 'Sofia Sans Semi Condensed', sans-serif;
+}
+
+.event-detail-date strong {
+  color: #7b35d0;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.event-detail-content {
+  position: relative;
+  width: min(calc(100% - 24px), 560px);
+  min-height: 400px;
+  margin: -28px auto 0;
+  border-radius: 18px 18px 0 0;
+  padding: 22px 18px 24px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.event-detail-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.event-detail-title-row h1 {
+  margin: 0 0 12px;
+  color: #27232b;
+  font: 800 22px/1.08 'Sofia Sans Semi Condensed', 'Barlow Condensed', sans-serif;
+}
+
+.event-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  color: #56505b;
+  font: 600 14px/18px 'Barlow Condensed', sans-serif;
+}
+
+.event-detail-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.event-detail-meta img {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
+
+.event-detail-meta span:last-child img {
+  width: 11px;
+  height: 14px;
+}
+
+.event-detail-price {
+  max-width: 76px;
+  display: flex;
+  flex: 0 0 68px;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 8px;
+  padding: 10px 8px;
+  color: #7b35d0;
+  background: #f5f0fa;
+  text-align: center;
+  font: 700 17px/1 'DM Sans', sans-serif;
+}
+
+.event-detail-price small {
+  color: #6d6672;
+  font: 400 9px/1.2 'DM Sans', sans-serif;
+}
+
+.event-detail-description {
+  margin-top: 28px;
+  border-top: 1px solid #e7e3eb;
+  padding-top: 16px;
+}
+
+.event-detail-description h2 {
+  margin: 0 0 8px;
+  color: #39333e;
+  font: 600 17px/1.2 'Sofia Sans Semi Condensed', sans-serif;
+}
+
+.event-detail-description p {
+  margin: 0;
+  color: #544d58;
+  font: 400 14px/1.5 'DM Sans', sans-serif;
+}
+
+.event-detail-facts {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  font: 400 13px/1.4 'DM Sans', sans-serif;
+}
+
+.event-detail-facts div {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px;
+}
+
+.event-detail-facts dt {
+  color: #766e7b;
+}
+
+.event-detail-facts dd {
+  margin: 0;
+  color: #322c37;
+}
+
+.event-detail-state {
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: #625b66;
+  font: 400 15px/1.45 'DM Sans', sans-serif;
+  text-align: center;
+}
+
+.event-detail-actions {
+  position: fixed;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #eeeaf2;
+  padding: 8px 16px max(8px, env(safe-area-inset-bottom));
+  background: #fff;
+}
+
+.event-detail-actions p {
+  flex: 1;
+  margin: 0;
+  color: #716a76;
+  font: 400 11px/1.35 'DM Sans', sans-serif;
+}
+
+.event-detail-actions button {
+  width: min(58%, 257px);
+  height: 42px;
+  border: 0;
+  border-radius: 24px;
+  color: #fff;
+  background: #7b35d0;
+  font: 500 16px/1 'Sofia Sans Semi Condensed', sans-serif;
+  opacity: 0.6;
+}
+
+@media (min-width: 700px) {
+  .event-detail-hero {
+    height: 280px;
+  }
+}

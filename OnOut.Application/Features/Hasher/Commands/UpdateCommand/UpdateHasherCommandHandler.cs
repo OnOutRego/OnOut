@@ -43,7 +43,20 @@ namespace OnOut.Application.Features.Hasher.Commands.UpdateCommand
                 throw new NotFound($"Hasher Not found with ID: {request.Hasher.Id}", nameof(Hasher));
             }
 
-            var hasher = _mapper.Map<Domain.Hasher>(request.Hasher);
+            var hasher = await _repository.GetByAuth0SubjectAsync(request.SenderId!);
+            if (hasher == null || hasher.Id != request.Hasher.Id)
+            {
+                throw new NotFound($"Hasher Not found with ID: {request.Hasher.Id}", nameof(Hasher));
+            }
+
+            hasher.Name = request.Hasher.Name;
+            hasher.HashName = request.Hasher.HashName;
+            hasher.Email = request.Hasher.Email;
+            hasher.HomeCity = request.Hasher.HomeCity;
+            hasher.HomeState = request.Hasher.HomeState;
+            hasher.HomeCountry = request.Hasher.HomeCountry;
+            hasher.DietaryChoiceId = request.Hasher.DietaryChoiceId;
+            hasher.ProfileCompleted = request.Hasher.ProfileCompleted;
             await _repository.UpdateAsync(hasher);
             return Unit.Value;
         }

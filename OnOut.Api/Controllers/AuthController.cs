@@ -1,7 +1,3 @@
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
@@ -19,17 +15,6 @@ public class AuthController : ControllerBase
     public AuthController(IMediator mediator)
     {
         _mediator = mediator;
-    }
-
-    [HttpGet("login")]
-    public IActionResult Login([FromQuery] string? returnUrl = "/")
-    {
-        return Challenge(
-            new AuthenticationProperties
-            {
-                RedirectUri = returnUrl
-            },
-            OpenIdConnectDefaults.AuthenticationScheme);
     }
 
     [HttpGet("me")]
@@ -54,26 +39,16 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("logout")]
-    public IActionResult Logout()
-    {
-        return SignOut(
-            new AuthenticationProperties
-            {
-                RedirectUri = "/"
-            },
-            CookieAuthenticationDefaults.AuthenticationScheme,
-            OpenIdConnectDefaults.AuthenticationScheme);
-    }
-
     [HttpPut("profile")]
     public async Task<IActionResult> UpdateProfile([FromBody] UpdateHasherCommand command)
     {
-        if (command == null)
+        var subject = User.FindFirst("sub")?.Value;
+        if (command == null || string.IsNullOrWhiteSpace(subject))
         {
-            return BadRequest();
+            return Unauthorized();
         }
 
+        command.SenderId = subject;
         var updated = await _mediator.Send(command);
         return Ok(updated);
     }

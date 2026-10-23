@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OnOut.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class newInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -192,7 +192,7 @@ namespace OnOut.Persistance.Migrations
                         column: x => x.CreatorId,
                         principalTable: "Hashers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Events_Kennels_KennelId",
                         column: x => x.KennelId,
@@ -219,7 +219,7 @@ namespace OnOut.Persistance.Migrations
                         column: x => x.HasherId,
                         principalTable: "Hashers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Mismanagement_Kennels_KennelId",
                         column: x => x.KennelId,
@@ -235,7 +235,7 @@ namespace OnOut.Persistance.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     HasherId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     KennelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -247,20 +247,17 @@ namespace OnOut.Persistance.Migrations
                         name: "FK_KennelMembers_Hashers_HasherId",
                         column: x => x.HasherId,
                         principalTable: "Hashers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_KennelMembers_KennelRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "KennelRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_KennelMembers_Kennels_KennelId",
                         column: x => x.KennelId,
                         principalTable: "Kennels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -291,7 +288,7 @@ namespace OnOut.Persistance.Migrations
                         column: x => x.HasherId,
                         principalTable: "Hashers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(

@@ -20,6 +20,15 @@ namespace OnOut.Persistance.Repositories
             this._context = context;
         }
 
+        public override async Task<List<Kennel>> GetAllAsync()
+        {
+            return await _context.Kennels
+                .AsNoTracking()
+                .Include(x => x.Members)
+                .Include(x => x.Events)
+                .ToListAsync();
+        }
+
         public async Task<List<Kennel>> GetKennelList()
         {
             var kennels = await _context.Kennels

@@ -16,6 +16,9 @@ namespace OnOut.Application.MappingProfiles
         public KennelProfile()
         {
             CreateMap<Kennel, KennelDto>().ReverseMap();
+            CreateMap<Kennel, KennelListDto>()
+                .ForMember(destination => destination.NumMembers, options => options.MapFrom(source => source.Members == null ? 0 : source.Members.Count))
+                .ForMember(destination => destination.NumEvents, options => options.MapFrom(source => source.Events == null ? 0 : source.Events.Count));
             CreateMap<KennelMember, KennelMemberDto>().ReverseMap();
             CreateMap<CreateKennelCommand, Kennel>();
             CreateMap<KennelRoles, KennelRolesDto>().ReverseMap();

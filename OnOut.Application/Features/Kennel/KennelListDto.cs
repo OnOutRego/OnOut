@@ -11,6 +11,8 @@ namespace OnOut.Application.Features.Kennel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public byte[] PrimaryImage { get; set; } = Array.Empty<byte>();
+        public byte[] BannerImage { get; set; } = Array.Empty<byte>();
         public string City { get; set; }
         public string Country { get; set; }
         public string State { get; set; }

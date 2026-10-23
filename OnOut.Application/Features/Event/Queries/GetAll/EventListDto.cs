@@ -15,7 +15,7 @@ namespace OnOut.Application.Features.Event.Queries.GetAll
         public string Description { get; set; }
         public Address Location { get; set; }
 
-        DateTime TrailTime { get; set; }
+        public DateTime TrailTime { get; set; }
 
         public double ShiggyLevel { get; set; }
         public bool HasKennel { get; set; }

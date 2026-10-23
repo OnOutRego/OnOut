@@ -29,6 +29,38 @@ namespace OnOut.Persistance.DatabaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(OnOutDbContext).Assembly);
+
+            modelBuilder.Entity<KennelMember>()
+                .HasOne(km => km.Hasher)
+                .WithMany()
+                .HasForeignKey(km => km.HasherId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<KennelMember>()
+                .HasOne(km => km.Kennel)
+                .WithMany(k => k.Members)
+                .HasForeignKey(km => km.KennelId)
+                .OnDelete(DeleteBehavior.ClientNoAction)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Rego>()
+                .HasOne(r => r.Hasher)
+                .WithMany()
+                .HasForeignKey(r => r.HasherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Event>()
+                .HasOne(e => e.Creator)
+                .WithMany()
+                .HasForeignKey(e => e.CreatorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MisManagmentHashers>()
+                .HasOne(m => m.Hasher)
+                .WithMany()
+                .HasForeignKey(m => m.HasherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
         }
 

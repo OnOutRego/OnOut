@@ -8,6 +8,7 @@ using OnOut.Application.Features.Event.Commands.DeleteEvent;
 using OnOut.Application.Features.Event.Commands.UpdateEvent;
 using OnOut.Application.Features.Event.Queries.GetAll;
 using OnOut.Application.Features.Event.Queries.GetWithDetails;
+using OnOut.Application.Contracts;
 
 namespace OnOut.Api.Controllers;
 
@@ -17,10 +18,12 @@ namespace OnOut.Api.Controllers;
 public class EventController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IHasherRepository _hasherRepository;
 
-    public EventController(IMediator mediator)
+    public EventController(IMediator mediator, IHasherRepository hasherRepository)
     {
         _mediator = mediator;
+        _hasherRepository = hasherRepository;
     }
 
     [HttpGet]
@@ -44,6 +47,20 @@ public class EventController : ControllerBase
         {
             return BadRequest();
         }
+
+        var subject = User.FindFirst("sub")?.Value;
+        if (string.IsNullOrWhiteSpace(subject))
+        {
+            return Unauthorized();
+        }
+
+        var creator = await _hasherRepository.GetByAuth0SubjectAsync(subject);
+        if (creator == null)
+        {
+            return Unauthorized();
+        }
+
+        command.CreatorId = creator.Id;
 
         var createdId = await _mediator.Send(command, cancellationToken);
         return CreatedAtAction(nameof(GetById), new { id = createdId }, createdId);

@@ -19,6 +19,16 @@ namespace OnOut.Persistance.Repositories
             this._context = context;
         }
 
+        public override async Task<List<Event>> GetAllAsync()
+        {
+            return await _context.Events
+                .AsNoTracking()
+                .Include(x => x.Location)
+                .Include(x => x.EventKennel)
+                .Include(x => x.EventType)
+                .ToListAsync();
+        }
+
         public async Task<Event> GetEventWithDetails(Guid eventId)
         {
             return await _context.Events
